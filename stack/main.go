@@ -5,7 +5,9 @@ http://interactivepython.org/runestone/static/pythonds/BasicDS/TheStackAbstractD
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Stack struct {
 	length int
@@ -59,26 +61,49 @@ func (stack *Stack) Size() int {
 }
 
 func main() {
-	mystack := Stack{length: 0, top: nil}
-	fmt.Println(mystack)
-	fmt.Println(mystack.IsEmpty())
 
-	mystack.Push(3)
-	fmt.Println(mystack)
-	fmt.Println(mystack.IsEmpty())
+	test1 := "{(([]))}"
+	test2 := "{({)}]"
 
-	mystack.Push("a string")
-	fmt.Println(mystack)
-	fmt.Println(mystack.IsEmpty())
+	// hash of reversed characters
+	reverse := map[rune]rune{
+		'}': '{',
+		')': '(',
+		']': '[',
+	}
 
-	fmt.Println(mystack.Peek())
-	fmt.Println(mystack.Size())
+	test1IsValid := true
+	test1Stack := Stack{length: 0, top: nil}
+	for _, value := range test1 {
+		if val, ok := reverse[value]; ok {
+			if !(test1Stack.top.value == val) {
+				test1IsValid = false
+				break
+			} else {
+				test1Stack.Pop()
+			}
+		} else {
+			test1Stack.Push(value)
+		}
+	}
 
-	this := mystack.Pop()
-	fmt.Println(mystack)
-	fmt.Println(this)
+	test2IsValid := true
+	test2Stack := Stack{length: 0, top: nil}
+	for _, value := range test2 {
+		if val, ok := reverse[value]; ok {
+			if !(test2Stack.top.value == val) {
+				test2IsValid = false
+				break
+			} else {
+				test2Stack.Pop()
+			}
+		} else {
+			test2Stack.Push(value)
+		}
+	}
 
-	fmt.Println(mystack.Peek())
-
-	fmt.Println(mystack.Size())
+	fmt.Println("---test1---")
+	fmt.Println(test1IsValid)
+	fmt.Println("---test2---")
+	fmt.Println(test2IsValid)
 }
