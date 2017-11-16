@@ -67,7 +67,7 @@ func main() {
 	fmt.Println(mystack)
 	fmt.Println(mystack.IsEmpty())
 
-	mystack.Push(4)
+	mystack.Push("a string")
 	fmt.Println(mystack)
 	fmt.Println(mystack.IsEmpty())
 
